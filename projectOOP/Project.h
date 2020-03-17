@@ -11,7 +11,7 @@ public:
 	Project();
 	Project(const char* gitPath, int nrBranches, int nrCommits);
 	Project(const Project &p);
-	//~Project();
+	~Project();
 
 	char* getPath();
 	int getNrBranches();

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+//default constructor; all atributes are intialized with 0/null
 Project::Project()
 {
 	this->gitPath = NULL;
@@ -9,6 +10,9 @@ Project::Project()
 	this->nrCommits = 0;
 }
 
+//parameter constructor
+//in: a path, number of branches, number of commits
+//out: an instance of Project class which has those attributes
 Project::Project(const char * gitPath, int nrBranches, int nrCommits)
 {
 	this->gitPath = new char[strlen(gitPath) + 1];
@@ -17,6 +21,9 @@ Project::Project(const char * gitPath, int nrBranches, int nrCommits)
 	this->nrCommits = nrCommits;
 }
 
+//copy constructor
+//in: an instance of Project
+//out: a new instance of Project, with the same attribute values as the first one
 Project::Project(const Project & p)
 {
 	this->gitPath = new char[strlen(p.gitPath) + 1];
@@ -25,14 +32,18 @@ Project::Project(const Project & p)
 	this->nrCommits = p.nrCommits;
 }
 
-/*Project::~Project()
+
+//destructor. it deallocates the memory used for gitPath
+Project::~Project()
 {
 	if (this->gitPath != NULL) {
 		delete[] this->gitPath;
 		this->gitPath = NULL;
 	}
-}*/
+}
 
+
+//getters and setters for each attribute from the class
 char * Project::getPath()
 {
 	return this->gitPath;
@@ -64,14 +75,17 @@ void Project::setNrCommits(int c)
 	this->nrCommits = c;
 }
 
+//compares 2 instances of Project
+//in: an instance of object that will be compared with the current one
+//out: 1 if they are equal, 0 otherwise
 bool Project::compare(Project & p)
 {
 	return ((strcmp(this->gitPath, p.gitPath) == 0) && (this->nrBranches == p.nrBranches) && (this->nrCommits=p.nrCommits));
 }
 
+//override
 Project & Project::operator=(const Project & p)
 {
-	//suprascriere
 	if (this != &p)
 	{
 		this->setPath(p.gitPath);
@@ -81,6 +95,9 @@ Project & Project::operator=(const Project & p)
 	return *this;
 }
 
+//function that returns a char array with info about the instance of Project
+//in:-
+//out: a char array with info about the instance of Project
 char * Project::toString()
 {
 	if (this->gitPath != NULL) {

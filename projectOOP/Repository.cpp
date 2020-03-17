@@ -1,6 +1,9 @@
 #include "Repository.h"
 #include <string>
 
+//function that adds an instance of Project to Repository
+//in: an instance of Project
+//out:- 
 int Repository::addProject(Project & p)
 {
 	int poz = verifDuplicate(p);
@@ -13,6 +16,9 @@ int Repository::addProject(Project & p)
 	return 0;
 }
 
+//function that removes an instance of Project from Repository
+//in: an instance of Project
+//out:- 
 int Repository::delProject(Project & p)
 {
 	int poz = verifDuplicate(p);
@@ -29,6 +35,9 @@ int Repository::delProject(Project & p)
 		return 0;
 }
 
+//function that checks if an instance of Project is duplicate
+//in: the instance of Project that will be checked
+//out: the position of the duplicate or -1 otherwise
 int Repository::verifDuplicate(Project & p)
 {
 	for (int i = 0; i < this->length; i++)
@@ -37,11 +46,13 @@ int Repository::verifDuplicate(Project & p)
 	return -1;
 }
 
+//getter that returns the array of Projects
 Project * Repository::getAll()
 {
 	return this->projects;
 }
 
+//function that returns the length of Repository
 int Repository::getLen()
 {
 	return this->length;

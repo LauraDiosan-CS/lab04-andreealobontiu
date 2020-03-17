@@ -6,6 +6,7 @@
 #include <iostream>
 using namespace std;
 
+//tests for the Project class
 void testProject()
 {
 	Project p1 = Project();
@@ -27,6 +28,7 @@ void testProject()
 	cout << "Project tests passed" << endl;
 }
 
+//tests for the Repository class
 void testRepository()
 {
 	Repository repo;

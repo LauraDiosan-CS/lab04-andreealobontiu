@@ -57,3 +57,15 @@ int Repository::getLen()
 {
 	return this->length;
 }
+
+//function that updates the info about an instance of Project
+//in: the index of the Project that will be updated and the new info
+//out: the instance of Project with updated info
+int Repository::updateProject(int index, Project newP)
+{
+	this->getAll()[index].setPath(newP.getPath());
+	this->getAll()[index].setNrBranches(newP.getNrBranches());
+	this->getAll()[index].setNrCommits(newP.getNrCommits());
+	return 1;
+
+}

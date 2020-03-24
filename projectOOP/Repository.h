@@ -12,5 +12,6 @@ public:
 	int verifDuplicate(Project& p);
 	Project* getAll();
 	int getLen();
+	int updateProject(int index, Project newP);
 };
 

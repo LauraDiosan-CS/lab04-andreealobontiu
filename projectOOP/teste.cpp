@@ -41,3 +41,18 @@ void testRepository()
 	assert(p1.compare(repo.getAll()[0]) == true);
 	cout << "Repository tests passed" << endl;
 }
+
+//tests for the Service class
+void testService()
+{
+	Repository repo;
+	Service serv{ &repo };
+	Project p2 = Project("abcd/a", 5, 3);
+	Project p1 = Project("andreea/scoala", 10, 6);
+	assert(serv.addProject(p1) == 1);
+	assert(serv.addProject(p2) == 1);
+	assert(serv.updateProject(0, p2) == 1);
+	assert(serv.getLen() == 2);
+
+	cout << "Service tests passed" << endl;
+}

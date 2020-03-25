@@ -49,10 +49,16 @@ void testService()
 	Service serv{ &repo };
 	Project p2 = Project("abcd/a", 5, 3);
 	Project p1 = Project("andreea/scoala", 10, 6);
+	serv.addProject(p2);
+	serv.addProject(p1);
 	assert(serv.addProject(p1) == 1);
 	assert(serv.addProject(p2) == 1);
 	assert(serv.updateProject(0, p2) == 1);
 	assert(serv.getLen() == 2);
+	assert(p2.compare(serv.getAll()[0]) == true);
+	assert(p1.compare(serv.getAll()[1]) == true);
+	serv.delProject("andreea/scoala");
+	assert(serv.getLen() == 1);
 
 	cout << "Service tests passed" << endl;
 }

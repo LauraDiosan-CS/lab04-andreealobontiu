@@ -25,7 +25,7 @@ int main()
 	serv.addProject(p3);
 	serv.updateProject(1, p1);
 	
-	//serv.delProject("andreea/scoala");
+	serv.delProject("andreea/scoala");
 	
 	cout << serv.getLen() << endl;
 	serv.readProjects();

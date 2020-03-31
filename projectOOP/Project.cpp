@@ -59,8 +59,12 @@ int Project::getNrCommits()
 	return this->nrCommits;
 }
 
-void Project::setPath(const char * p)
+void Project::setPath(const char* p)
 {
+	if (this->gitPath) 
+	{
+		delete[] this->gitPath;
+	}
 	this->gitPath = new char[strlen(p) + 1];
 	strcpy_s(this->gitPath, strlen(p) + 1, p);
 }

@@ -3,7 +3,7 @@
 class Project
 {
 private:
-	char* gitPath=new char[100];
+	char* gitPath=NULL;
 	int nrBranches;
 	int nrCommits;
 

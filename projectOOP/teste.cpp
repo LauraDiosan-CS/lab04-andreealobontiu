@@ -1,9 +1,12 @@
 #pragma once
 #include "teste.h"
-#include "Project.h"
-#include "Repository.h"
-#include "assert.h"
 #include <iostream>
+#include <string.h>
+#include "assert.h"
+#include "Project.h"
+#include "Service.h"
+#include "Repository.h"
+
 using namespace std;
 
 //tests for the Project class
@@ -34,11 +37,12 @@ void testRepository()
 	Repository repo;
 	Project p2 = Project("abcd/a", 5, 3);
 	Project p1 = Project("local", 10, 6);
-	repo.addProject(p1);
-	repo.addProject(p2);
+	repo.addProject("abcd/a", 5, 3);
+	repo.addProject("local", 10, 6);
 	assert(repo.getLen() == 2);
-	assert(p2.compare(repo.getAll()[1]) == true);
-	assert(p1.compare(repo.getAll()[0]) == true);
+	assert(p2.compare(repo.getAll()[0]) == true);
+	assert(p1.compare(repo.getAll()[1]) == true);
+	
 	cout << "Repository tests passed" << endl;
 }
 
@@ -46,19 +50,37 @@ void testRepository()
 void testService()
 {
 	Repository repo;
-	Service serv{ &repo };
+	Service serv;
 	Project p2 = Project("abcd/a", 5, 3);
-	Project p1 = Project("andreea/scoala", 10, 6);
-	serv.addProject(p2);
-	serv.addProject(p1);
-	assert(serv.addProject(p1) == 1);
-	assert(serv.addProject(p2) == 1);
-	assert(serv.updateProject(0, p2) == 1);
+	Project p1 = Project("master", 10, 6);
+	serv.addProject("abcd/a", 5, 3);
+	serv.addProject("andreea/scoala", 10, 6);
+	serv.addProject("abcd/a", 15, 20);
+	serv.addProject("local", 10, 8);
+	assert(serv.addProject("abcd/a", 5, 3) == 1);
+	assert(serv.addProject("andreea/scoala", 10, 6) == 1);
+	assert(serv.updateProject(0, p1) == 1);
+	assert(serv.getLen() == 4);
+	assert(p2.compare(serv.getAll()[0]) == false);
+	assert(p1.compare(serv.getAll()[1]) == false);
+	serv.delProjectPath("andreea/scoala");
+	assert(serv.getLen() == 3);
+
+	serv.delProject(1);
 	assert(serv.getLen() == 2);
-	assert(p2.compare(serv.getAll()[0]) == true);
-	assert(p1.compare(serv.getAll()[1]) == true);
-	serv.delProject("andreea/scoala");
-	assert(serv.getLen() == 1);
+	serv.addProject("master", 7, 0);
+	serv.addProject("andreea/scoala", 5, 26);
+
+	assert(serv.filterByPath("master") == 2);
+	assert(serv.filterByCommits(8) == 1);
+	assert(serv.filterGreaterBranches(8) == 2);
+	assert(serv.filterCommitsInterval(0, 5) == 1);
+	assert(serv.maxBranches() == 10);
+	assert(serv.minCommits() == 0);
+	assert(serv.sumBranches() == 32);
+	assert(serv.sumCommits() == 40);
+
+	
 
 	cout << "Service tests passed" << endl;
 }
